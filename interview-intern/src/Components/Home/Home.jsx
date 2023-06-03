@@ -6,12 +6,17 @@ const Home = () => {
     const allProduct =useLoaderData()
     const [products,setProducts]=useState(allProduct)
     console.log(products);
+    const [edit,setEdit]=useState({})
 
     const handleDelete=(id)=>{
         const deleteItem=products.filter(product=>product.id !== id)
         setProducts(deleteItem)
     }
-
+const handleEdit=(id)=>{
+    const editItem=products.find(product=>product.id === id)
+    setEdit(editItem)
+        console.log(editItem);
+}
     return (
        <div className='flex gap-5'>
          <div className='w-4/5 grid grid-cols-2 gap-5 mt-20'>
@@ -37,15 +42,16 @@ const Home = () => {
             <h1 className=''>Add New Product</h1>
            <form action="">
             <p className='text-start'>Product Name</p>
-           <input type="text" placeholder="Type here" className="input input-bordered w-full " />
+           <input type="text" placeholder="Type here" className="input input-bordered w-full " defaultValue={edit.title} />
             <p className='text-start'>Description</p>
-           <input type="text" placeholder="Type here" className="input input-bordered w-full " />
+           <input type="text" placeholder="Type here" className="input input-bordered w-full " defaultValue={edit.description} />
             <p className='text-start'>Category</p>
-           <input type="text" placeholder="Type here" className="input input-bordered w-full " />
+           <input type="text" placeholder="Type here" className="input input-bordered w-full " defaultValue={edit.category} />
             <p className='text-start'>Image Url</p>
-           <input type="text" placeholder="Type here" className="input input-bordered w-full " />
+           <input type="text" placeholder="Type here" className="input input-bordered w-full " defaultValue={edit.image} />
            <p className='text-start'>Price</p>
-           <input type="text" placeholder="Type here" className="input input-bordered w-full " />
+           <input type="text" placeholder="Type here" className="input input-bordered w-full " defaultValue={edit.price} />
+           <button className='bg-blue-600 text-white px-5 py-2 rounded mt-5'>Add</button>
            </form>
         </div>
        </div>
